@@ -20,11 +20,14 @@ WORKDIR /app
 
 COPY . .
 
+# Install Docusaurus CLI globally
+RUN npm install -g @docusaurus/core
+
+# Install build dependencies
+RUN apk add --no-cache autoconf automake libtool nasm musl-dev
+
 RUN npm run clear
 
 RUN npm install && npm run build
 
 CMD ["npm", "run", "serve"]
-
-
-EXPOSE 3000
